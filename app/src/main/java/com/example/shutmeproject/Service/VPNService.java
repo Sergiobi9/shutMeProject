@@ -102,7 +102,7 @@ public class VPNService extends VpnService {
     private void createVPN(){
         //appPackages = getPackageNames();
         appPackages = new String[1];
-        appPackages[0] = "es.burgerking.android";
+        appPackages[0] = "com.instagram.android";
 
         // Loop through the app packages in the array and confirm that the app is
         // installed before adding the app to the allowed list.
@@ -112,8 +112,8 @@ public class VPNService extends VpnService {
         for (String appPackage: appPackages) {
             try {
                 packageManager.getPackageInfo(appPackage, 0);
-                builder.addAllowedApplication(appPackage);
-                //builder.addDisallowedApplication(appPackage);
+                builder.addAllowedApplication(appPackage); //Disables connection
+                //builder.addDisallowedApplication(appPackage); //Enables connection
             } catch (PackageManager.NameNotFoundException e) {
                 // The app isn't installed.
             }
