@@ -3,18 +3,32 @@ package com.example.shutmeproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.shutmeproject.Bytes.BytesConverterManager;
+import com.example.shutmeproject.Helpers.ByteUnitsEnum;
+import com.example.shutmeproject.Helpers.MyConnectivityManager;
+import com.example.shutmeproject.Helpers.Permissions;
+import com.example.shutmeproject.Traffic.TrafficManager;
+
 public class MainActivity extends AppCompatActivity {
 
     private Context context;
+    private MyConnectivityManager myConnectivityManager;
+    private TrafficManager trafficManager;
+    private BytesConverterManager bytesConverterManager;
+    private Permissions permissions;
+
+    private static final String TAG = "MainActivityLOG";
 
     private ConnectivityManager.NetworkCallback networkCallback = (ConnectivityManager.NetworkCallback) new ConnectivityManager.NetworkCallback() {
         @Override
@@ -67,5 +81,43 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         context = getApplicationContext();
+
+        initClasses();
+
+        setUpWifiManager();
+        getTotalDataToday();
+
+        askForPhonePermissions();
+    }
+
+    private void askForPhonePermissions() {
+        if (!permissions.checkModifyPhoneStatePermission(context)){
+            permissions.askModifyPhoneStatePermission(MainActivity.this);
+        }
+    }
+
+    private void initClasses(){
+        myConnectivityManager = new MyConnectivityManager(context);
+        trafficManager = new TrafficManager();
+        bytesConverterManager = new BytesConverterManager();
+        permissions = new Permissions();
+    }
+
+    private void setUpWifiManager(){
+
+        NetworkRequest networkRequest = new NetworkRequest.Builder()
+                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                .build();
+
+        myConnectivityManager.connectivityManager.registerNetworkCallback(networkRequest, networkCallback);
+    }
+
+    private void getTotalDataToday(){
+        double dataInBytes = trafficManager.trafficStats.getTotalRxBytes();
+        Log.d(TAG, String.valueOf(dataInBytes));
+
+        double dataInGigaBytes = bytesConverterManager.convertBytes(dataInBytes, ByteUnitsEnum.GIGABYTE);
+
+        Toast.makeText(context, + dataInGigaBytes + " GB", Toast.LENGTH_SHORT).show();
     }
 }
