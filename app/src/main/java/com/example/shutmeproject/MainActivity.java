@@ -2,6 +2,8 @@ package com.example.shutmeproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Context;
@@ -12,21 +14,34 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.example.shutmeproject.Adapters.AppAdapter;
 import com.example.shutmeproject.Bytes.BytesConverterManager;
 import com.example.shutmeproject.Helpers.ByteUnitsEnum;
+import com.example.shutmeproject.Helpers.InstaledApps;
 import com.example.shutmeproject.Helpers.MyConnectivityManager;
 import com.example.shutmeproject.Helpers.Permissions;
+import com.example.shutmeproject.Model.AppInfo;
 import com.example.shutmeproject.Traffic.TrafficManager;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements AppAdapter.OnMyAppListener {
 
     private Context context;
     private MyConnectivityManager myConnectivityManager;
     private TrafficManager trafficManager;
     private BytesConverterManager bytesConverterManager;
     private Permissions permissions;
+    private InstaledApps instaledApps;
+    private ArrayList<AppInfo> appInfoArrayList;
+
+    private RecyclerView mListView;
+    private AppAdapter appAdapter;
+    private AppAdapter.OnMyAppListener onMyAppListener;
 
     private static final String TAG = "MainActivityLOG";
 
@@ -78,13 +93,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //Remove notification bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main);
 
         context = getApplicationContext();
+        onMyAppListener = this;
 
         initClasses();
         setUpWifiManager();
         askForPhonePermissions();
+
+        getInstaledApps();
+        initList();
+    }
+
+    private void initList(){
+        mListView = findViewById(R.id.apps_list);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+        mListView.setLayoutManager(mLayoutManager);
+
+        appAdapter = new AppAdapter(appInfoArrayList, onMyAppListener, context);
+        mListView.setAdapter(appAdapter);
     }
 
     private void askForPhonePermissions() {
@@ -98,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         trafficManager = new TrafficManager();
         bytesConverterManager = new BytesConverterManager();
         permissions = new Permissions();
+        instaledApps = new InstaledApps();
     }
 
     private void setUpWifiManager(){
@@ -112,4 +146,13 @@ public class MainActivity extends AppCompatActivity {
     /*private void getTotalDataToday(){
         double totalDataToday = trafficManager.getTotalRxGigaBytes();
     }*/
+
+    private void getInstaledApps(){
+        appInfoArrayList = instaledApps.getInstaledApps(context);
+    }
+
+    @Override
+    public void onMyAppClicked(int position) {
+
+    }
 }
