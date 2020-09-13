@@ -26,17 +26,21 @@ import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 
 import com.example.shutmeproject.Aplication.MyApplication;
+import com.example.shutmeproject.Helpers.ToyVPNConnection;
 import com.example.shutmeproject.MainActivity;
 import com.example.shutmeproject.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Set;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -48,6 +52,7 @@ public class VPNService extends VpnService {
     private static final int notificationId = 23;
     private SharedPreferences sharedPreferences;
     private String[] appPackages;
+    private static final String TAG = "VPNService";
 
     private Handler mHandler;
     private static class Connection extends Pair<Thread, ParcelFileDescriptor> {
@@ -107,8 +112,8 @@ public class VPNService extends VpnService {
         for (String appPackage: appPackages) {
             try {
                 packageManager.getPackageInfo(appPackage, 0);
-                //builder.addAllowedApplication(appPackage);
-                builder.addDisallowedApplication(appPackage);
+                builder.addAllowedApplication(appPackage);
+                //builder.addDisallowedApplication(appPackage);
             } catch (PackageManager.NameNotFoundException e) {
                 // The app isn't installed.
             }
@@ -138,16 +143,20 @@ public class VPNService extends VpnService {
                 .setSmallIcon(R.drawable.logo_icon)
                 .setSound(alarmSound)
                 .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
                 .build();
 
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         return notification;
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
+        disconnect();
+    }
+
+    private void disconnect() {
         stopForeground(true);
     }
 
