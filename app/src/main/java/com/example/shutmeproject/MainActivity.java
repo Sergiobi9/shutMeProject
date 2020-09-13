@@ -83,10 +83,7 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         initClasses();
-
         setUpWifiManager();
-        getTotalDataToday();
-
         askForPhonePermissions();
     }
 
@@ -112,12 +109,7 @@ public class MainActivity extends AppCompatActivity {
         myConnectivityManager.connectivityManager.registerNetworkCallback(networkRequest, networkCallback);
     }
 
-    private void getTotalDataToday(){
-        double dataInBytes = trafficManager.trafficStats.getTotalRxBytes();
-        Log.d(TAG, String.valueOf(dataInBytes));
-
-        double dataInGigaBytes = bytesConverterManager.convertBytes(dataInBytes, ByteUnitsEnum.GIGABYTE);
-
-        Toast.makeText(context, + dataInGigaBytes + " GB", Toast.LENGTH_SHORT).show();
-    }
+    /*private void getTotalDataToday(){
+        double totalDataToday = trafficManager.getTotalRxGigaBytes();
+    }*/
 }
