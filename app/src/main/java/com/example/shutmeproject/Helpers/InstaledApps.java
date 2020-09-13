@@ -2,6 +2,7 @@ package com.example.shutmeproject.Helpers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageInstaller;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import com.example.shutmeproject.Model.AppInfo;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,29 +22,43 @@ import java.util.List;
 public class InstaledApps {
 
     private static String TAG = "InstaledApps";
+    private SharedPreferences sharedPreferences;
 
     public InstaledApps() {}
 
     public ArrayList<AppInfo> getInstaledApps(Context context){
+        sharedPreferences = context.getSharedPreferences("USER", Context.MODE_PRIVATE);
         ArrayList<AppInfo> appInfoArrayList = new ArrayList<>();
+
 
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 
         List<PackageInfo> packageAppList = context.getPackageManager().getInstalledPackages(0);
+        String[] packagesArrayList = new String[packageAppList.size()];
 
-        for (PackageInfo packageInfo : packageAppList){
+        for (int i = 0; i < packageAppList.size(); i++){
+            PackageInfo packageInfo = packageAppList.get(i);
             String name = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
             String packageName = packageInfo.packageName;
             Drawable icon = packageInfo.applicationInfo.loadIcon(context.getPackageManager());
 
             AppInfo appInfo = new AppInfo(name, packageName, icon);
+            packagesArrayList[i] = packageName;
             appInfoArrayList.add(appInfo);
         }
 
         Log.d(TAG, appInfoArrayList.toString());
         Collections.sort(appInfoArrayList, new AppNameComparator());
 
+        savePackageNameArrayList(packagesArrayList);
+
         return appInfoArrayList;
+    }
+
+    private void savePackageNameArrayList(String[] packagesArrayList){
+        Gson gson = new Gson();
+        String json = gson.toJson(packagesArrayList);
+        sharedPreferences.edit().putString("appsPackageNameArrayList", json).apply();
     }
 }
