@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.Schedule.AddScheduleFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_above="@+id/timePicker"
+            android:layout_marginBottom="40dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/llBedTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvBedTimeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_bed_time_dark"
+                    android:drawablePadding="8dp"
+                    android:letterSpacing="0.2"
+                    android:text="START TIME"
+                    android:textColor="@color/gray"
+                    android:textSize="10sp"/>
+
+
+                <TextView
+                    android:id="@+id/tvBedTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:letterSpacing="0.06"
+                    android:lineSpacingExtra="6sp"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    tools:text="12:15 PM"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llWakeUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_wake_up_dark"
+                    android:drawablePadding="8dp"
+                    android:letterSpacing="0.2"
+                    android:text="END TIME"
+                    android:textColor="@color/gray"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp"/>
+
+
+                <TextView
+                    android:id="@+id/tvWakeTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:letterSpacing="0.06"
+                    android:lineSpacingExtra="6sp"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    tools:text="7:45 AM"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.example.shutmeproject.TimePickerUtilz.SleepTimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:divisionColor="@color/gray"
+            app:labelColor="@color/gray"
+            app:progressBackgroundColor="@color/whitegray"
+            app:progressBgStrokeWidth="28dp"
+            app:progressColor="@color/happy"
+            app:progressStrokeWidth="28dp"
+            app:sleepLayoutId="@layout/layout_schedule_start"
+            app:wakeLayoutId="@layout/layout_schedule_stop">
+        </com.example.shutmeproject.TimePickerUtilz.SleepTimePicker>
+
+        <LinearLayout
+            android:id="@+id/llDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvHours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:textSize="24sp"
+                    tools:text="7"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:letterSpacing="0.2"
+                    android:lineSpacingExtra="18sp"
+                    android:text="HR"
+                    android:textColor="@color/gray"
+                    android:textSize="10sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llMins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center_horizontal|bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvMins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textColor="@color/gray"
+                    android:textSize="24sp"
+                    tools:text="7"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:letterSpacing="0.2"
+                    android:lineSpacingExtra="18sp"
+                    android:text="MIN"
+                    android:textColor="@color/gray"
+                    android:textSize="10sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</FrameLayout>

@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.shutmeproject.Adapters.AppAdapter;
 import com.example.shutmeproject.Bytes.BytesConverterManager;
 import com.example.shutmeproject.Fragments.AppListFragment;
+import com.example.shutmeproject.Fragments.Schedule.AddScheduleFragment;
 import com.example.shutmeproject.Fragments.ScheduleFragment;
 import com.example.shutmeproject.Fragments.SettingsFragment;
 import com.example.shutmeproject.Fragments.ShopFragment;
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (index) {
             case R.id.navigation_01:
-                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new ScheduleFragment()).addToBackStack(null).commit();
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new AddScheduleFragment()).addToBackStack(null).commit();
                 break;
             case R.id.navigation_02:
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new AppListFragment()).addToBackStack(null).commit();
