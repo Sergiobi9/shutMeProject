@@ -1,6 +1,8 @@
 package com.example.shutmeproject.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
@@ -13,9 +15,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.shutmeproject.Adapters.AppAdapter;
@@ -40,10 +47,13 @@ public class AppListFragment extends Fragment implements AppAdapter.OnMyAppListe
     private Permissions permissions;
     private InstaledApps instaledApps;
     private ArrayList<AppInfo> appInfoArrayList;
+    private ArrayList<AppInfo> copyAppInfoArrayList;
 
     private RecyclerView mListView;
     private AppAdapter appAdapter;
     private AppAdapter.OnMyAppListener onMyAppListener;
+
+    private EditText seacherEditText;
 
     private static final String TAG = "AppListFragment";
 
@@ -117,8 +127,33 @@ public class AppListFragment extends Fragment implements AppAdapter.OnMyAppListe
 
         getInstaledApps();
         initList();
+        initSearcher();
 
         return view;
+    }
+
+    private void initSearcher(){
+        seacherEditText = view.findViewById(R.id.searcher);
+        seacherEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.d(TAG, String.valueOf(charSequence.length()));
+
+                refreshAppList(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+    }
+
+    private void refreshAppList(String inputSearch){
+
     }
 
     private void initList(){
@@ -159,10 +194,20 @@ public class AppListFragment extends Fragment implements AppAdapter.OnMyAppListe
 
     private void getInstaledApps(){
         appInfoArrayList = instaledApps.getInstaledApps(context);
+        copyAppInfoArrayList = appInfoArrayList;
     }
 
     @Override
     public void onMyAppClicked(int position) {
-        Toast.makeText(context, appInfoArrayList.get(position).getName(), Toast.LENGTH_SHORT).show();
+        String name = appInfoArrayList.get(position).getName();
+        String packageName = appInfoArrayList.get(position).getPackageName();
+
+        try {
+            Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+            context.startActivity(intent);
+        } catch (Exception e){
+            Toast.makeText(context, "Could not open " + name, Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

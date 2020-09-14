@@ -22,6 +22,9 @@ import android.widget.Toast;
 import com.example.shutmeproject.Adapters.AppAdapter;
 import com.example.shutmeproject.Bytes.BytesConverterManager;
 import com.example.shutmeproject.Fragments.AppListFragment;
+import com.example.shutmeproject.Fragments.ScheduleFragment;
+import com.example.shutmeproject.Fragments.SettingsFragment;
+import com.example.shutmeproject.Fragments.ShopFragment;
 import com.example.shutmeproject.Fragments.VPNFragment;
 import com.example.shutmeproject.Helpers.ByteUnitsEnum;
 import com.example.shutmeproject.Helpers.InstaledApps;
@@ -65,11 +68,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView(){
         bottomNavigationMenu = (BottomNavigationView) findViewById(R.id.navigation);
-        bottomNavigationMenu.setSelectedItemId(R.id.navigation_01);
+        bottomNavigationMenu.setSelectedItemId(R.id.navigation_03);
 
         bottomNavigationMenu.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        doSelectTabIndex(R.id.navigation_01);
+        doSelectTabIndex(R.id.navigation_03);
     }
 
     private boolean doSelectTabIndex(int index){
@@ -77,15 +80,39 @@ public class MainActivity extends AppCompatActivity {
 
         switch (index) {
             case R.id.navigation_01:
-                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new VPNFragment()).addToBackStack(null).commit();
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new ScheduleFragment()).addToBackStack(null).commit();
                 break;
             case R.id.navigation_02:
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new AppListFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.navigation_03:
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new VPNFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.navigation_04:
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new ShopFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.navigation_05:
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new SettingsFragment()).addToBackStack(null).commit();
                 break;
             default:
                 toReturn = false;
                 break;
         }
         return toReturn;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

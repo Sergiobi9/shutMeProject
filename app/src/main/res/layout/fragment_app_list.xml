@@ -5,10 +5,34 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.AppListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:paddingTop="25dp"
-        android:id="@+id/apps_list"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/searcher"
+            android:layout_margin="20dp"
+            android:paddingRight="15sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15sp"
+            android:hint="Search an app"
+
+            android:inputType="text"
+            android:textSize="20sp"
+            android:background="@drawable/border_searcher"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+        </EditText>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/apps_list"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/searcher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
 
 </FrameLayout>

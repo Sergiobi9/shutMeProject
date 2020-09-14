@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
+import android.text.format.Formatter;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -34,12 +35,15 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.Timer;
@@ -52,6 +56,7 @@ public class VPNService extends VpnService {
     private static final int notificationId = 23;
     private SharedPreferences sharedPreferences;
     private String[] appPackages;
+    private Context context;
     private static final String TAG = "VPNService";
 
     public static final String ACTION_CONNECT = "com.example.android.toyvpn.START";
@@ -59,17 +64,7 @@ public class VPNService extends VpnService {
 
     public String ACTION = "";
 
-    private Handler mHandler;
-    private static class Connection extends Pair<Thread, ParcelFileDescriptor> {
-        public Connection(Thread thread, ParcelFileDescriptor pfd) {
-            super(thread, pfd);
-        }
-    }
-
-    private final AtomicReference<Thread> mConnectingThread = new AtomicReference<>();
-    private final AtomicReference<Connection> mConnection = new AtomicReference<>();
-    private AtomicInteger mNextConnectionId = new AtomicInteger(1);
-    private PendingIntent mConfigureIntent;
+    private ParcelFileDescriptor localTunnel;
 
 
     public VPNService(){}
@@ -84,6 +79,7 @@ public class VPNService extends VpnService {
     public void onCreate() {
         super.onCreate();
         startForeground(notificationId, getNotification());
+        context = this;
         sharedPreferences = getSharedPreferences("USER", MODE_PRIVATE);
 
            /* final Timer t = new Timer();
@@ -107,6 +103,11 @@ public class VPNService extends VpnService {
         appPackages = new String[1];
         appPackages[0] = "com.instagram.android";
 
+        String ipAddress = getWifiIPAddress();
+        String ipMobileAddress = getMobileIPAddress();
+
+        Log.d(TAG, "ipAddress: " + ipAddress + "\nipMobileAddress: " + ipMobileAddress);
+
         // Loop through the app packages in the array and confirm that the app is
         // installed before adding the app to the allowed list.
         VpnService.Builder builder = new VpnService.Builder();
@@ -124,11 +125,10 @@ public class VPNService extends VpnService {
         }
 
         // Complete the VPN interface config.
-        ParcelFileDescriptor localTunnel = builder
+        localTunnel = builder
                 .addAddress("2001:db8::1", 64)
                 .addRoute("::", 0)
                 .establish();
-
     }
 
     @Override
@@ -170,6 +170,28 @@ public class VPNService extends VpnService {
     private void disconnect() {
         createVPN();
         stopForeground(true);
+    }
+
+    public String getWifiIPAddress() {
+        WifiManager wifiMgr = (WifiManager) context.getSystemService(WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
+        int ip = wifiInfo.getIpAddress();
+        return  Formatter.formatIpAddress(ip);
+    }
+
+    public static String getMobileIPAddress() {
+        try {
+            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface interf: interfaces) {
+                List<InetAddress> addrs = Collections.list(interf.getInetAddresses());
+                for (InetAddress addr : addrs) {
+                    if (!addr.isLoopbackAddress()) {
+                        return  addr.getHostAddress();
+                    }
+                }
+            }
+        } catch (Exception ex) { } // for now eat exceptions
+        return "";
     }
 
 }
