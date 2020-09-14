@@ -12,10 +12,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:layout_above="@+id/timePicker"
-            android:layout_marginBottom="40dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -31,7 +30,7 @@
                     android:drawableStart="@drawable/ic_bed_time_dark"
                     android:drawablePadding="8dp"
                     android:letterSpacing="0.2"
-                    android:text="START TIME"
+                    android:text="@string/start_time"
                     android:textColor="@color/gray"
                     android:textSize="10sp"/>
 
@@ -61,7 +60,7 @@
                     android:drawableStart="@drawable/ic_wake_up_dark"
                     android:drawablePadding="8dp"
                     android:letterSpacing="0.2"
-                    android:text="END TIME"
+                    android:text="@string/end_time"
                     android:textColor="@color/gray"
                     android:textSize="10sp"
                     tools:ignore="SmallSp"/>
@@ -127,7 +126,7 @@
                     android:layout_marginStart="4dp"
                     android:letterSpacing="0.2"
                     android:lineSpacingExtra="18sp"
-                    android:text="HR"
+                    android:text="@string/hour_shorted"
                     android:textColor="@color/gray"
                     android:textSize="10sp"/>
 
@@ -156,13 +155,191 @@
                     android:layout_marginStart="4dp"
                     android:letterSpacing="0.2"
                     android:lineSpacingExtra="18sp"
-                    android:text="MIN"
+                    android:text="@string/min_shorted"
                     android:textColor="@color/gray"
                     android:textSize="10sp"/>
 
             </LinearLayout>
-
         </LinearLayout>
+
+        <!-- Maybe should place a button that display this in a dialog and accept -->
+        <!--<RelativeLayout
+            android:id="@+id/daysWeekLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_below="@+id/timePicker">
+
+            <LinearLayout
+                android:id="@+id/first_row"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/circle">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="Lu"
+                        android:fontFamily="@font/nunito"
+                        android:textSize="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                    </TextView>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/circle">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="Ma"
+                        android:fontFamily="@font/nunito"
+                        android:textSize="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                    </TextView>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/circle">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="Mi"
+                        android:fontFamily="@font/nunito"
+                        android:textSize="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                    </TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/circle">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="Ju"
+                        android:fontFamily="@font/nunito"
+                        android:textSize="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                    </TextView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/second_row"
+                android:layout_below="@+id/first_row"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/circle">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="Vi"
+                        android:fontFamily="@font/nunito"
+                        android:textSize="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                    </TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/circle">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="Sa"
+                        android:fontFamily="@font/nunito"
+                        android:textSize="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                    </TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/circle">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="Do"
+                        android:fontFamily="@font/nunito"
+                        android:textSize="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                    </TextView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>-->
+
+    <RelativeLayout
+        android:id="@+id/daysWeekLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_below="@+id/timePicker">
+
+        <Button
+            android:id="@+id/add_schedule_accept_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:fontFamily="@font/nunito"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:background="@drawable/button_ripple">
+
+
+        </Button>
+    </RelativeLayout>
+
+
     </RelativeLayout>
 
 

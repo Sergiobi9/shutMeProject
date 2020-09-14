@@ -16,6 +16,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/nunito"
+            android:background="@drawable/button_ripple"
             android:text="START">
         </Button>
 
