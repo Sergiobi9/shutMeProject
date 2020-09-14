@@ -9,6 +9,7 @@ import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 
@@ -34,18 +35,26 @@ public class InstaledApps {
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 
-        List<PackageInfo> packageAppList = context.getPackageManager().getInstalledPackages(0);
+        final List<PackageInfo> packageAppList = context.getPackageManager().getInstalledPackages(PackageManager.GET_PERMISSIONS);
         String[] packagesArrayList = new String[packageAppList.size()];
 
         for (int i = 0; i < packageAppList.size(); i++){
             PackageInfo packageInfo = packageAppList.get(i);
-            String name = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
-            String packageName = packageInfo.packageName;
-            Drawable icon = packageInfo.applicationInfo.loadIcon(context.getPackageManager());
 
-            AppInfo appInfo = new AppInfo(name, packageName, icon);
-            packagesArrayList[i] = packageName;
-            appInfoArrayList.add(appInfo);
+            if (packageInfo.requestedPermissions != null){
+                for (String permission : packageInfo.requestedPermissions) {
+                    if (TextUtils.equals(permission, android.Manifest.permission.INTERNET)) {
+                        String name = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
+                        String packageName = packageInfo.packageName;
+                        Drawable icon = packageInfo.applicationInfo.loadIcon(context.getPackageManager());
+
+                        AppInfo appInfo = new AppInfo(name, packageName, icon);
+                        packagesArrayList[i] = packageName;
+                        appInfoArrayList.add(appInfo);
+                        break;
+                    }
+                }
+            }
         }
 
         Log.d(TAG, appInfoArrayList.toString());

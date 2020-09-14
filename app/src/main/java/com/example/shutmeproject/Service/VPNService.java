@@ -116,10 +116,8 @@ public class VPNService extends VpnService {
             try {
                 packageManager.getPackageInfo(appPackage, 0);
                 if (ACTION.equals(ACTION_CONNECT))
-                    builder.addAllowedApplication(appPackage); //Disables connection
-                else builder.addDisallowedApplication(appPackage);  // //Enables connection
-
-
+                    builder.addAllowedApplication(appPackage); //Disables connection WIFI and Data
+                else builder.addDisallowedApplication(appPackage);  // //Enables connection WIFI and Data
             } catch (PackageManager.NameNotFoundException e) {
                 // The app isn't installed.
             }
