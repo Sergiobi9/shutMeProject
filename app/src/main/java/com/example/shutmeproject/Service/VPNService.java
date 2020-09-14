@@ -54,6 +54,11 @@ public class VPNService extends VpnService {
     private String[] appPackages;
     private static final String TAG = "VPNService";
 
+    public static final String ACTION_CONNECT = "com.example.android.toyvpn.START";
+    public static final String ACTION_DISCONNECT = "com.example.android.toyvpn.STOP";
+
+    public String ACTION = "";
+
     private Handler mHandler;
     private static class Connection extends Pair<Thread, ParcelFileDescriptor> {
         public Connection(Thread thread, ParcelFileDescriptor pfd) {
@@ -80,8 +85,6 @@ public class VPNService extends VpnService {
         super.onCreate();
         startForeground(notificationId, getNotification());
         sharedPreferences = getSharedPreferences("USER", MODE_PRIVATE);
-
-        createVPN();
 
            /* final Timer t = new Timer();
             t.schedule(new TimerTask() {
@@ -112,8 +115,11 @@ public class VPNService extends VpnService {
         for (String appPackage: appPackages) {
             try {
                 packageManager.getPackageInfo(appPackage, 0);
-                builder.addAllowedApplication(appPackage); //Disables connection
-                //builder.addDisallowedApplication(appPackage); //Enables connection
+                if (ACTION.equals(ACTION_CONNECT))
+                    builder.addAllowedApplication(appPackage); //Disables connection
+                else builder.addDisallowedApplication(appPackage);  // //Enables connection
+
+
             } catch (PackageManager.NameNotFoundException e) {
                 // The app isn't installed.
             }
@@ -129,7 +135,14 @@ public class VPNService extends VpnService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return START_STICKY;
+        ACTION = intent.getAction();
+        if (intent != null && ACTION_DISCONNECT.equals(ACTION)) {
+            disconnect();
+            return START_NOT_STICKY;
+        } else {
+            createVPN();
+            return START_STICKY;
+        }
     }
 
     private Notification getNotification() {
@@ -157,6 +170,7 @@ public class VPNService extends VpnService {
     }
 
     private void disconnect() {
+        createVPN();
         stopForeground(true);
     }
 

@@ -80,12 +80,15 @@ public class VPNFragment extends Fragment {
     public void onActivityResult(int request, int result, Intent data) {
         if (result == RESULT_OK) {
             Intent intent = new Intent(context, VPNService.class);
+            intent.setAction(VPNService.ACTION_CONNECT);
             ContextCompat.startForegroundService(context, intent);
         }
     }
 
     private void stopVPNService(){
         Intent intent = new Intent(context, VPNService.class);
-        context.stopService(intent);
+        intent.setAction(VPNService.ACTION_DISCONNECT);
+        ContextCompat.startForegroundService(context, intent);
+
     }
 }
