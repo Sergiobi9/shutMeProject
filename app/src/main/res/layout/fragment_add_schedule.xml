@@ -90,7 +90,7 @@
             android:layout_centerVertical="true"
             app:divisionColor="@color/gray"
             app:labelColor="@color/gray"
-            app:progressBackgroundColor="@color/whitegray"
+            app:progressBackgroundColor="@color/schedulegray"
             app:progressBgStrokeWidth="28dp"
             app:progressColor="@color/happy"
             app:progressStrokeWidth="28dp"
