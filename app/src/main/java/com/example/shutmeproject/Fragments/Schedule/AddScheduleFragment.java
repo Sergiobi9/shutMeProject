@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -85,14 +86,23 @@ public class AddScheduleFragment extends Fragment {
         appPackages.add("com.instagram.android");
         identifier = sharedPreferences.getInt("scheduleIdentifier", 1);
 
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.main_container, new ScheduleMenuFragment());
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+                    if (addScheduleSecondScreen.getVisibility() == View.VISIBLE){
+                        addScheduleSecondScreen.setVisibility(View.GONE);
+                        addScheduleFirstScreen.setVisibility(View.VISIBLE);
+                        identifier--;
+                     } else {
+                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.main_container, new ScheduleMenuFragment());
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+
                     return true;
                 }
                 return false;
@@ -156,7 +166,14 @@ public class AddScheduleFragment extends Fragment {
         Duration duration = Duration.between(bedDateTime, wakeDateTime);
         long hours = duration.toHours();
         long minutes = duration.toMinutes() % 60;
-        hoursTV.setText(String.valueOf(hours));
+
+        if (hours == 24 && minutes != 0){
+            hours = 0;
+            hoursTV.setText(String.valueOf(hours));
+        } else {
+            hoursTV.setText(String.valueOf(hours));
+        }
+
         minutesTV.setText(String.valueOf(minutes));
     }
 
@@ -197,23 +214,39 @@ public class AddScheduleFragment extends Fragment {
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createScheduleTime();
-                dialog.cancel();
+                boolean canProceed = createScheduleTime();
+
+                if (canProceed){
+                    dialog.cancel();
+                }
             }
         });
 
         dialog.show();
     }
 
-    private void createScheduleTime(){
+    private boolean createScheduleTime(){
         String scheduleName = scheduleNameEditText.getText().toString();
+
+        if (scheduleName.isEmpty()){
+            Toast.makeText(context, "Please, name your time table", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (daysOfTheWeekSelected.size() == 0){
+            Toast.makeText(context, "Please, choose at least one day o the week your time table", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         newTimeTable = new TimeTable(identifier, scheduleName, startTime, endTime, daysOfTheWeekSelected, appPackages);
 
         identifier ++;
         sharedPreferences.edit().putInt("scheduleIdentifier", identifier).apply();
 
-        changeScreen();
         Log.d(TAG, newTimeTable.toString());
+        changeScreen();
+
+        return true;
     }
 
     private void changeScreen(){

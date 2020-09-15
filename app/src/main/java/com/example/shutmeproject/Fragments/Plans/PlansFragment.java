@@ -1,4 +1,4 @@
-package com.example.shutmeproject.Fragments;
+package com.example.shutmeproject.Fragments.Plans;
 
 import android.os.Bundle;
 
@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 
 import com.example.shutmeproject.R;
 
-public class ShopFragment extends Fragment {
+public class PlansFragment extends Fragment {
 
-    public ShopFragment() {
+    public PlansFragment() {
         // Required empty public constructor
     }
 
@@ -24,6 +24,6 @@ public class ShopFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_shop, container, false);
+        return inflater.inflate(R.layout.fragment_plans, container, false);
     }
 }

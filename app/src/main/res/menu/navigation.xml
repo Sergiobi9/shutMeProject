@@ -4,27 +4,27 @@
     <item
         android:id="@+id/navigation_01"
         android:icon="@drawable/schedule_icon"
-        android:title="Schedule" />
+        android:title="@string/schedule" />
 
     <item
         android:id="@+id/navigation_02"
         android:icon="@drawable/list_icon"
-        android:title="App list" />
+        android:title="@string/app_list" />
 
     <item
         android:id="@+id/navigation_03"
         android:icon="@drawable/vpn_icon"
-        android:title="Start" />
+        android:title="@string/start" />
 
     <item
         android:id="@+id/navigation_04"
         android:icon="@drawable/shop_icon"
-        android:title="Shop" />
+        android:title="@string/plans" />
 
     <item
         android:id="@+id/navigation_05"
         android:icon="@drawable/settings_icon"
-        android:title="Settings" />
+        android:title="@string/settings" />
 
 
 </menu>

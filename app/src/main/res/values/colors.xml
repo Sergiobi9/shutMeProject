@@ -12,4 +12,8 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
+
+    <color name="freePlan">#FDE8E7</color>
+    <color name="starterPlan">#F4E6FD</color>
+    <color name="proPlan">#FDF6E3</color>
 </resources>

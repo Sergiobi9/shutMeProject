@@ -16,5 +16,9 @@
     <string name="turn_off_notifications">Turn off notifications</string>
     <string name="notifications">Notifications</string>
     <string name="schedule_menu">Schedule menu</string>
+    <string name="schedule">Schedule</string>
+    <string name="app_list">App list</string>
+    <string name="start">Start</string>
+    <string name="plans">Plans</string>
 
 </resources>

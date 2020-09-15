@@ -10,10 +10,9 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.shutmeproject.Fragments.AppListFragment;
-import com.example.shutmeproject.Fragments.Schedule.AddScheduleFragment;
 import com.example.shutmeproject.Fragments.Schedule.ScheduleMenuFragment;
 import com.example.shutmeproject.Fragments.Settings.SettingsFragment;
-import com.example.shutmeproject.Fragments.ShopFragment;
+import com.example.shutmeproject.Fragments.Plans.PlansFragment;
 import com.example.shutmeproject.Fragments.VPNFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new VPNFragment()).addToBackStack(null).commit();
                 break;
             case R.id.navigation_04:
-                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new ShopFragment()).addToBackStack(null).commit();
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PlansFragment()).addToBackStack(null).commit();
                 break;
             case R.id.navigation_05:
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new SettingsFragment()).addToBackStack(null).commit();

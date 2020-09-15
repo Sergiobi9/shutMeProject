@@ -350,11 +350,29 @@
         android:visibility="gone"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/settings_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="25dp"
+            android:gravity="center"
+            android:paddingRight="25dp"
+            android:fontFamily="@font/nunito"
+            android:layout_marginTop="50dp"
+            android:text="Select from the following applications, which ones do you want to apply your time table"
+            android:textColor="@color/gray"
+            android:textSize="20sp"></TextView>
 
         <EditText
             android:id="@+id/searcher"
-            android:layout_margin="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+
+            android:layout_marginTop="40dp"
             android:paddingRight="15sp"
+            android:layout_below="@+id/settings_title_tv"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:paddingLeft="15sp"
@@ -367,11 +385,26 @@
             android:layout_height="50dp">
         </EditText>
 
+        <Switch
+            android:id="@+id/appy_to_all_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searcher"
+            android:layout_marginTop="20dp"
+            android:colorControlActivated="@color/happy"
+            android:fontFamily="@font/nunito"
+            android:text="Apply to all applications"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:textSize="18sp"
+            android:theme="@style/ThemeOverlay.MySwitch" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/apps_list"
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/searcher"
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/appy_to_all_switch"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
