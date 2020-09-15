@@ -15,7 +15,25 @@
         android:paddingBottom="25dp"
         android:background="@drawable/dialog_border">
 
+
+        <EditText
+            android:id="@+id/schedule_name"
+            android:layout_margin="20dp"
+            android:paddingRight="15sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15sp"
+            android:hint="Schedule name"
+
+            android:inputType="text"
+            android:textSize="20sp"
+            android:background="@drawable/border_searcher"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+        </EditText>
+
         <TextView
+            android:layout_below="@+id/schedule_name"
             android:id="@+id/please_select_tv"
             android:layout_width="match_parent"
             android:layout_marginLeft="20dp"
@@ -45,12 +63,14 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/monday"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginRight="25dp"
                     android:background="@drawable/circle">
 
                     <TextView
+                        android:id="@+id/monday_tv"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:text="Lu"
@@ -64,12 +84,14 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/tuesday"
                     android:layout_width="50dp"
                     android:layout_marginRight="25dp"
                     android:layout_height="50dp"
                     android:background="@drawable/circle">
 
                     <TextView
+                        android:id="@+id/tuesday_tv"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:text="Ma"
@@ -83,12 +105,14 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/wednesday"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginRight="25dp"
                     android:background="@drawable/circle">
 
                     <TextView
+                        android:id="@+id/wednesday_tv"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:text="Mi"
@@ -101,11 +125,13 @@
                     </TextView>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/thursday"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="@drawable/circle">
 
                     <TextView
+                        android:id="@+id/thursday_tv"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:text="Ju"
@@ -130,12 +156,14 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:id="@+id/friday"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginRight="25dp"
                     android:background="@drawable/circle">
 
                     <TextView
+                        android:id="@+id/friday_tv"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:text="Vi"
@@ -149,12 +177,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/saturday"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginRight="25dp"
                     android:background="@drawable/circle">
 
                     <TextView
+                        android:id="@+id/saturday_tv"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:text="Sa"
@@ -168,11 +198,13 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/sunday"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="@drawable/circle">
 
                     <TextView
+                        android:id="@+id/sunday_tv"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:text="Do"

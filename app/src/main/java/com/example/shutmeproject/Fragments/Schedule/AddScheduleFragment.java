@@ -3,11 +3,14 @@ package com.example.shutmeproject.Fragments.Schedule;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +18,14 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.shutmeproject.Model.TimeTable;
 import com.example.shutmeproject.R;
 import com.example.shutmeproject.TimePickerUtilz.SleepTimePicker;
 import com.jakewharton.threetenabp.AndroidThreeTen;
@@ -32,6 +37,7 @@ import org.threeten.bp.LocalTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import kotlin.Unit;
@@ -42,11 +48,26 @@ public class AddScheduleFragment extends Fragment {
     private View view;
     private Context context;
     private final String MONDAY = "MONDAY", TUESDAY = "TUESDAY", WEDNESDAY = "WEDNESDAY", THURSDAY = "THURSDAY",
-            FRIDAY = "FRIDAY", SATURDAY = "SATURDAY", SUNDAY = "SUNDAY", TAG = "ScheduleTimePicker";
+            FRIDAY = "FRIDAY", SATURDAY = "SATURDAY", SUNDAY = "SUNDAY", TAG = "AddScheduleFragment";
     private SleepTimePicker sleepTimePicker;
     private TextView bedTimeTV, wakeTimeTV, hoursTV, minutesTV;
-    private String scheduleName = "", startTime = "8:00", endTime = "13:00";
+    private String startTime = "8:00", endTime = "13:00";
     private Button scheduleNextBtn;
+    private SharedPreferences sharedPreferences;
+
+    private int identifier;
+
+    private ArrayList<String> appPackages = new ArrayList<>();
+
+    private LinearLayout monday, tuesday, wednesday, thursday, friday, saturday, sunday;
+    private TextView mondayText, tuesdayText, wednesdayText, thursdayText, fridayText,
+            saturdayText, sundayText;
+
+    private EditText scheduleNameEditText;
+
+    private TimeTable newTimeTable;
+
+    private ArrayList<String> daysOfTheWeekSelected = new ArrayList<>();
 
     public AddScheduleFragment() {
         // Required empty public constructor
@@ -64,6 +85,10 @@ public class AddScheduleFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_schedule, container, false);
         context = getContext();
+        sharedPreferences = context.getSharedPreferences("USER", Context.MODE_PRIVATE);
+
+        appPackages.add("com.instagram.android");
+        identifier = sharedPreferences.getInt("scheduleIdentifier", 1);
 
         initTimePicker();
         return view;
@@ -132,13 +157,176 @@ public class AddScheduleFragment extends Fragment {
         dialog.setContentView(view);
 
         Button acceptBtn = (Button) view.findViewById(R.id.days_of_the_week_next_btn);
+        scheduleNameEditText = view.findViewById(R.id.schedule_name);
+
+        monday = view.findViewById(R.id.monday);
+        mondayText = view.findViewById(R.id.monday_tv);
+
+        tuesday = view.findViewById(R.id.tuesday);
+        tuesdayText = view.findViewById(R.id.tuesday_tv);
+
+        wednesday = view.findViewById(R.id.wednesday);
+        wednesdayText = view.findViewById(R.id.wednesday_tv);
+
+        thursday = view.findViewById(R.id.thursday);
+        thursdayText = view.findViewById(R.id.thursday_tv);
+
+        friday = view.findViewById(R.id.friday);
+        fridayText = view.findViewById(R.id.friday_tv);
+
+        saturday = view.findViewById(R.id.saturday);
+        saturdayText = view.findViewById(R.id.saturday_tv);
+
+        sunday = view.findViewById(R.id.sunday);
+        sundayText = view.findViewById(R.id.sunday_tv);
+
+        manageDialogClicks();
+
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                createScheduleTime();
                 dialog.cancel();
             }
         });
 
         dialog.show();
+    }
+
+    private void createScheduleTime(){
+        String scheduleName = scheduleNameEditText.getText().toString();
+        newTimeTable = new TimeTable(identifier, scheduleName, startTime, endTime, daysOfTheWeekSelected, appPackages);
+
+        identifier ++;
+        sharedPreferences.edit().putInt("scheduleIdentifier", identifier).apply();
+        Log.d(TAG, newTimeTable.toString());
+    }
+
+    private void manageDialogClicks(){
+        monday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (daysOfTheWeekSelected.contains(MONDAY)){
+                    daysOfTheWeekSelected.remove(MONDAY);
+                    monday.setBackground(getResources().getDrawable(R.drawable.circle));
+                    mondayText.setTextColor(getResources().getColor(R.color.gray));
+                    mondayText.setTypeface(null, Typeface.NORMAL);
+                }
+                else {
+                    daysOfTheWeekSelected.add(MONDAY);
+                    monday.setBackground(getResources().getDrawable(R.drawable.circle_pressed));
+                    mondayText.setTextColor(getResources().getColor(R.color.white));
+                    mondayText.setTypeface(null, Typeface.BOLD);
+                }
+            }
+        });
+
+        tuesday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (daysOfTheWeekSelected.contains(TUESDAY)){
+                    daysOfTheWeekSelected.remove(TUESDAY);
+                    tuesday.setBackground(getResources().getDrawable(R.drawable.circle));
+                    tuesdayText.setTextColor(getResources().getColor(R.color.gray));
+                    tuesdayText.setTypeface(null, Typeface.NORMAL);
+                }
+                else {
+                    daysOfTheWeekSelected.add(TUESDAY);
+                    tuesday.setBackground(getResources().getDrawable(R.drawable.circle_pressed));
+                    tuesdayText.setTextColor(getResources().getColor(R.color.white));
+                    tuesdayText.setTypeface(null, Typeface.BOLD);
+                }
+            }
+        });
+
+        wednesday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (daysOfTheWeekSelected.contains(WEDNESDAY)){
+                    daysOfTheWeekSelected.remove(WEDNESDAY);
+                    wednesday.setBackground(getResources().getDrawable(R.drawable.circle));
+                    wednesdayText.setTextColor(getResources().getColor(R.color.gray));
+                    wednesdayText.setTypeface(null, Typeface.NORMAL);
+                }
+                else {
+                    daysOfTheWeekSelected.add(WEDNESDAY);
+                    wednesday.setBackground(getResources().getDrawable(R.drawable.circle_pressed));
+                    wednesdayText.setTextColor(getResources().getColor(R.color.white));
+                    wednesdayText.setTypeface(null, Typeface.BOLD);
+                }
+            }
+        });
+
+        thursday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (daysOfTheWeekSelected.contains(THURSDAY)){
+                    daysOfTheWeekSelected.remove(THURSDAY);
+                    thursday.setBackground(getResources().getDrawable(R.drawable.circle));
+                    thursdayText.setTextColor(getResources().getColor(R.color.gray));
+                    thursdayText.setTypeface(null, Typeface.NORMAL);
+                }
+                else {
+                    daysOfTheWeekSelected.add(THURSDAY);
+                    thursday.setBackground(getResources().getDrawable(R.drawable.circle_pressed));
+                    thursdayText.setTextColor(getResources().getColor(R.color.white));
+                    thursdayText.setTypeface(null, Typeface.BOLD);
+                }
+            }
+        });
+
+        friday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (daysOfTheWeekSelected.contains(FRIDAY)){
+                    daysOfTheWeekSelected.remove(FRIDAY);
+                    friday.setBackground(getResources().getDrawable(R.drawable.circle));
+                    fridayText.setTextColor(getResources().getColor(R.color.gray));
+                    fridayText.setTypeface(null, Typeface.NORMAL);
+                }
+                else {
+                    daysOfTheWeekSelected.add(FRIDAY);
+                    friday.setBackground(getResources().getDrawable(R.drawable.circle_pressed));
+                    fridayText.setTextColor(getResources().getColor(R.color.white));
+                    fridayText.setTypeface(null, Typeface.BOLD);
+                }
+            }
+        });
+
+        saturday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (daysOfTheWeekSelected.contains(SATURDAY)){
+                    daysOfTheWeekSelected.remove(SATURDAY);
+                    saturday.setBackground(getResources().getDrawable(R.drawable.circle));
+                    saturdayText.setTextColor(getResources().getColor(R.color.gray));
+                    saturdayText.setTypeface(null, Typeface.NORMAL);
+                }
+                else {
+                    daysOfTheWeekSelected.add(SATURDAY);
+                    saturday.setBackground(getResources().getDrawable(R.drawable.circle_pressed));
+                    saturdayText.setTextColor(getResources().getColor(R.color.white));
+                    saturdayText.setTypeface(null, Typeface.BOLD);
+                }
+            }
+        });
+
+        sunday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (daysOfTheWeekSelected.contains(SUNDAY)){
+                    daysOfTheWeekSelected.remove(SUNDAY);
+                    sunday.setBackground(getResources().getDrawable(R.drawable.circle));
+                    sundayText.setTextColor(getResources().getColor(R.color.gray));
+                    sundayText.setTypeface(null, Typeface.NORMAL);
+                }
+                else {
+                    daysOfTheWeekSelected.add(SUNDAY);
+                    sunday.setBackground(getResources().getDrawable(R.drawable.circle_pressed));
+                    sundayText.setTextColor(getResources().getColor(R.color.white));
+                    sundayText.setTypeface(null, Typeface.BOLD);
+                }
+            }
+        });
     }
 }

@@ -55,7 +55,7 @@ public class VPNService extends VpnService {
 
     private static final int notificationId = 23;
     private SharedPreferences sharedPreferences;
-    private String[] appPackages;
+    private ArrayList<String> appPackages;
     private Context context;
     private static final String TAG = "VPNService";
 
@@ -100,8 +100,8 @@ public class VPNService extends VpnService {
 
     private void createVPN(){
         //appPackages = getPackageNames();
-        appPackages = new String[1];
-        appPackages[0] = "com.instagram.android";
+        appPackages = new ArrayList<>();
+        appPackages.add("com.instagram.android");
 
         String ipAddress = getWifiIPAddress();
         String ipMobileAddress = getMobileIPAddress();
