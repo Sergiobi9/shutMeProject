@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.VerifiedInputEvent;
 import android.view.View;
@@ -18,6 +19,7 @@ public class SettingsFragment extends Fragment {
 
     private View view;
     private static final String TAG = "SettingsFragment";
+    private static final String HI_MOM = "HI_MOM", CONDITIONS = "CONDITIONS", PRIVACY = "PRIVACY";
 
     private Button hiMomBtn, termsAndConditionsBtn ,privacyPolicyBtn;
 
@@ -46,10 +48,8 @@ public class SettingsFragment extends Fragment {
         hiMomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.main_container, new HiMomFragment());
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                openSection(HI_MOM);
+
             }
         });
 
@@ -57,10 +57,7 @@ public class SettingsFragment extends Fragment {
         termsAndConditionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.main_container, new TermsAndConditionsFragment());
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                openSection(CONDITIONS);
             }
         });
 
@@ -68,12 +65,37 @@ public class SettingsFragment extends Fragment {
         privacyPolicyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                openSection(PRIVACY);
+            }
+        });
+    }
+
+    private void openSection(String section){
+        if (getFragmentManager() == null){
+            Log.d(TAG, "Fragment manager is null WTF");
+            return;
+        }
+
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        switch (section){
+            case HI_MOM:
+                fragmentTransaction.replace(R.id.main_container, new HiMomFragment());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                break;
+            case CONDITIONS:
+                fragmentTransaction.replace(R.id.main_container, new TermsAndConditionsFragment());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                break;
+            case PRIVACY:
                 fragmentTransaction.replace(R.id.main_container, new PrivacyPolicyFragment());
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-            }
-        });
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

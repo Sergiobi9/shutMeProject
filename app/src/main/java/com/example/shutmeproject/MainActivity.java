@@ -11,6 +11,7 @@ import android.view.WindowManager;
 
 import com.example.shutmeproject.Fragments.AppListFragment;
 import com.example.shutmeproject.Fragments.Schedule.AddScheduleFragment;
+import com.example.shutmeproject.Fragments.Schedule.ScheduleMenuFragment;
 import com.example.shutmeproject.Fragments.Settings.SettingsFragment;
 import com.example.shutmeproject.Fragments.ShopFragment;
 import com.example.shutmeproject.Fragments.VPNFragment;
@@ -20,8 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Context context;
     private static final String TAG = "MainActivityLOG";
+    static MainActivity instance;
 
-    private BottomNavigationView bottomNavigationMenu;
+    public BottomNavigationView bottomNavigationMenu;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        instance = this;
         context = getApplicationContext();
 
         initView();
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (index) {
             case R.id.navigation_01:
-                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new AddScheduleFragment()).addToBackStack(null).commit();
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new ScheduleMenuFragment()).addToBackStack(null).commit();
                 break;
             case R.id.navigation_02:
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new AppListFragment()).addToBackStack(null).commit();
@@ -80,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
         }
         return toReturn;
     }
+
+    public static MainActivity getInstance() {
+        return instance;
+    }
+
 
     @Override
     protected void onResume() {
