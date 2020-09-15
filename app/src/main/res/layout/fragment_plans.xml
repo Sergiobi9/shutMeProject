@@ -58,6 +58,9 @@
                         android:layout_below="@+id/settings_title_tv"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:elevation="2dp"
                         android:background="@drawable/free_plan_background"
                         android:orientation="horizontal">
 
@@ -82,14 +85,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="You can create two schedule time tables">
+                                android:text="@string/free_plan_fragment_first_text">
                             </TextView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:text="Schedule range of one hour">
+                                android:gravity="center"
+                                android:text="@string/free_plan_fragment_second_text">
                             </TextView>
                         </LinearLayout>
 
@@ -102,6 +106,9 @@
                         android:layout_below="@+id/free_plan_box"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
+                        android:elevation="2dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:layout_marginTop="50dp"
                         android:layout_marginBottom="50dp"
                         android:background="@drawable/starter_plan_background"
@@ -127,21 +134,23 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="You can create five schedule time tables">
+                                android:text="@string/starter_plan_fragment_first_text">
                             </TextView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:text="Schedule range of two hours">
+                                android:gravity="center"
+                                android:text="@string/starter_plan_fragment_second_text">
                             </TextView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:gravity="center"
                                 android:layout_marginTop="10dp"
-                                android:text="4,99€ per month">
+                                android:text="@string/starter_plan_fragment_pricing">
                             </TextView>
                         </LinearLayout>
 
@@ -152,6 +161,10 @@
                         android:layout_below="@+id/starter_plan_box"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:elevation="2dp"
                         android:background="@drawable/pro_plan_background"
                         android:orientation="horizontal">
 
@@ -175,21 +188,23 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="You can create unlimited schedule time tables">
+                                android:text="@string/pro_plan_fragment_first_text">
                             </TextView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:text="Schedule range 24 hours">
+                                android:gravity="center"
+                                android:text="@string/pro_plan_fragment_second_text">
                             </TextView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:text="9,99€ per month">
+                                android:gravity="center"
+                                android:text="@string/pro_plan_fragment_pricing">
                             </TextView>
                         </LinearLayout>
 

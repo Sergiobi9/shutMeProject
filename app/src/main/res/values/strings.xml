@@ -20,5 +20,13 @@
     <string name="app_list">App list</string>
     <string name="start">Start</string>
     <string name="plans">Plans</string>
+    <string name="pro_plan_fragment_pricing">9,99€ per month</string>
+    <string name="pro_plan_fragment_second_text">Schedule range 24 hours</string>
+    <string name="pro_plan_fragment_first_text">You can create unlimited schedule time tables</string>
+    <string name="starter_plan_fragment_pricing">4,99€ per month</string>
+    <string name="starter_plan_fragment_second_text">Schedule range of two hours</string>
+    <string name="starter_plan_fragment_first_text">You can create five schedule time tables</string>
+    <string name="free_plan_fragment_second_text">Schedule range of one hour</string>
+    <string name="free_plan_fragment_first_text">You can create two schedule time tables</string>
 
 </resources>
