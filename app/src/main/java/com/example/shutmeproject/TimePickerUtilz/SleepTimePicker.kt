@@ -286,7 +286,10 @@ class SleepTimePicker @JvmOverloads constructor(
     }
 
     private fun computeWakeTime(): LocalTime {
-        val wakeMins = snapMinutes(angleToMins(wakeAngle), stepMinutes)
+        //val wakeMins = snapMinutes(angleToMins(sleepAngle - 30), stepMinutes) //interval one hour FREE PLAN
+        //val wakeMins = snapMinutes(angleToMins(sleepAngle - 60), stepMinutes) //interval two hours STARTER PLAN
+
+        val wakeMins = snapMinutes(angleToMins(wakeAngle), stepMinutes) //interval unlimited hours STARTER PLAN
         return LocalTime.of((wakeMins / 60) % 24, wakeMins % 60)
     }
 

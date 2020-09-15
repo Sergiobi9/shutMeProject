@@ -2,6 +2,7 @@ package com.example.shutmeproject.Fragments.Schedule;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,6 +20,7 @@ import com.example.shutmeproject.Fragments.Settings.PrivacyPolicyFragment;
 import com.example.shutmeproject.Fragments.Settings.TermsAndConditionsFragment;
 import com.example.shutmeproject.Fragments.VPNFragment;
 import com.example.shutmeproject.MainActivity;
+import com.example.shutmeproject.Plans.Plans;
 import com.example.shutmeproject.R;
 
 public class ScheduleMenuFragment extends Fragment {
@@ -29,7 +31,6 @@ public class ScheduleMenuFragment extends Fragment {
     private static final String ADD_SCHEDULE = "ADD_SCHEDULE", LIST_SCHEDULE = "LIST_SCHEDULE";
 
     private LinearLayout addNewScheduleBtn, listScheduleBtn;
-    private MainActivity mainActivity;
 
 
     public ScheduleMenuFragment() {
@@ -45,8 +46,6 @@ public class ScheduleMenuFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_schedule_menu, container, false);
-        context = getContext();
-        mainActivity = MainActivity.getInstance();
 
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override

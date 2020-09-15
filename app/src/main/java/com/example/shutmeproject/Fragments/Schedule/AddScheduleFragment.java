@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.shutmeproject.Model.TimeTable;
+import com.example.shutmeproject.Plans.Plans;
 import com.example.shutmeproject.R;
 import com.example.shutmeproject.TimePickerUtilz.SleepTimePicker;
 import com.jakewharton.threetenabp.AndroidThreeTen;
@@ -47,7 +48,8 @@ public class AddScheduleFragment extends Fragment {
             FRIDAY = "FRIDAY", SATURDAY = "SATURDAY", SUNDAY = "SUNDAY", TAG = "AddScheduleFragment";
     private SleepTimePicker sleepTimePicker;
     private TextView bedTimeTV, wakeTimeTV, hoursTV, minutesTV;
-    private String startTime = "8:00", endTime = "13:00";
+    private String startTime = "9:00", endTime = "10:00";
+    private int startHour = 9, startMinute = 0, endHour = 10, endMinute = 0;
     private Button scheduleNextBtn;
     private SharedPreferences sharedPreferences;
 
@@ -65,6 +67,8 @@ public class AddScheduleFragment extends Fragment {
 
     private RelativeLayout addScheduleFirstScreen, addScheduleSecondScreen;
 
+    private String userPlan;
+
     public AddScheduleFragment() {
         // Required empty public constructor
     }
@@ -72,6 +76,9 @@ public class AddScheduleFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getContext();
+        sharedPreferences = context.getSharedPreferences("USER", Context.MODE_PRIVATE);
+        userPlan = sharedPreferences.getString("userPlan", Plans.FREE_PLAN);
         AndroidThreeTen.init(getContext());
     }
 
@@ -80,9 +87,6 @@ public class AddScheduleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_schedule, container, false);
-        context = getContext();
-        sharedPreferences = context.getSharedPreferences("USER", Context.MODE_PRIVATE);
-
         appPackages.add("com.instagram.android");
         identifier = sharedPreferences.getInt("scheduleIdentifier", 1);
 
@@ -113,9 +117,43 @@ public class AddScheduleFragment extends Fragment {
         return view;
     }
 
+    private void setTime(){
+        switch (userPlan){
+            case Plans.FREE_PLAN:
+                startTime = "9:00";
+                endTime = "10:00";
+                startHour = 9;
+                startMinute = 0;
+                endHour = 10;
+                endMinute = 0;
+                break;
+            case Plans.STARTER_PLAN:
+                startTime = "9:00";
+                endTime = "11:00";
+                startHour = 9;
+                startMinute = 0;
+                endHour = 11;
+                endMinute = 0;
+                break;
+            case Plans.PRO_PLAN:
+                startTime = "9:00";
+                endTime = "12:00";
+                startHour = 9;
+                startMinute = 0;
+                endHour = 12;
+                endMinute = 0;
+                break;
+            default:
+                break;
+        }
+    }
+
     private void initTimePicker() {
+
+        setTime();
+
         sleepTimePicker = (SleepTimePicker) view.findViewById(R.id.timePicker);
-        sleepTimePicker.setTime(LocalTime.of(8,0), LocalTime.of(13,0));
+        sleepTimePicker.setTime(LocalTime.of(startHour,startMinute), LocalTime.of(endHour,endMinute));
 
         scheduleNextBtn = view.findViewById(R.id.add_schedule_accept_btn);
         scheduleNextBtn.setOnClickListener(new View.OnClickListener() {
