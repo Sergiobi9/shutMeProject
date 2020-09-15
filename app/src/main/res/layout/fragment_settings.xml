@@ -16,10 +16,118 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:layout_marginTop="75dp"
+                android:layout_marginTop="30dp"
                 android:layout_height="match_parent">
 
+                <TextView
+                    android:id="@+id/settings_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
+                    android:textSize="25sp"
+                    android:textColor="@color/gray"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/settings">
+                </TextView>
+
+                <LinearLayout
+                    android:id="@+id/notifications_layout"
+                    android:layout_below="@+id/settings_title_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="25dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/notifications_title_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito"
+                        android:textSize="20sp"
+                        android:textColor="@color/gray"
+                        android:text="@string/notifications">
+                    </TextView>
+
+                    <Switch
+                        android:id="@+id/turn_off_notifications_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/notifications_title_tv"
+                        android:layout_marginTop="20dp"
+                        android:colorControlActivated="@color/happy"
+                        android:fontFamily="@font/nunito"
+                        android:text="@string/turn_off_notifications"
+                        android:textColor="@color/gray"
+                        android:paddingLeft="25dp"
+                        android:textSize="18sp"
+                        android:theme="@style/ThemeOverlay.MySwitch" />
+
+                    <TextView
+                        android:id="@+id/turn_off_notifications_switch_description_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="25dp"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/nunito"
+                        android:text="Turn off notifications so you are not distracted"
+                        android:textSize="12sp" />
+
+                    <Switch
+                        android:id="@+id/turn_off_notifications_2_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/notifications_title_tv"
+                        android:layout_marginTop="40dp"
+                        android:colorControlActivated="@color/happy"
+                        android:fontFamily="@font/nunito"
+                        android:text="@string/turn_off_notifications"
+                        android:textColor="@color/gray"
+                        android:paddingLeft="25dp"
+                        android:textSize="18sp"
+                        android:theme="@style/ThemeOverlay.MySwitch" />
+
+                    <TextView
+                        android:id="@+id/turn_off_notifications_switch_2_description_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="25dp"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/nunito"
+                        android:text="Turn off notifications so you are not distracted"
+                        android:textSize="12sp" />
+
+                    <Switch
+                        android:id="@+id/turn_off_notifications_3_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/notifications_title_tv"
+                        android:layout_marginTop="40dp"
+                        android:colorControlActivated="@color/happy"
+                        android:fontFamily="@font/nunito"
+                        android:text="@string/turn_off_notifications"
+                        android:textColor="@color/gray"
+                        android:paddingLeft="25dp"
+                        android:textSize="18sp"
+                        android:theme="@style/ThemeOverlay.MySwitch" />
+
+                    <TextView
+                        android:id="@+id/turn_off_notifications_switch_3_description_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="25dp"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/nunito"
+                        android:text="Turn off notifications so you are not distracted"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+
+
                 <Button
+                    android:layout_below="@+id/notifications_layout"
+                    android:layout_marginTop="75dp"
                     android:id="@+id/hi_mom_btn"
                     android:layout_width="wrap_content"
                     android:textColor="@color/white"
