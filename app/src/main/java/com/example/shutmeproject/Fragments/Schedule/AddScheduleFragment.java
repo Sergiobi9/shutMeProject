@@ -2,28 +2,22 @@ package com.example.shutmeproject.Fragments.Schedule;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.shutmeproject.Model.TimeTable;
 import com.example.shutmeproject.R;
@@ -36,7 +30,6 @@ import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.LocalTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -64,10 +57,10 @@ public class AddScheduleFragment extends Fragment {
             saturdayText, sundayText;
 
     private EditText scheduleNameEditText;
-
     private TimeTable newTimeTable;
-
     private ArrayList<String> daysOfTheWeekSelected = new ArrayList<>();
+
+    private RelativeLayout addScheduleFirstScreen, addScheduleSecondScreen;
 
     public AddScheduleFragment() {
         // Required empty public constructor
@@ -121,6 +114,9 @@ public class AddScheduleFragment extends Fragment {
                 return null;
             }
         });
+
+        addScheduleFirstScreen = view.findViewById(R.id.add_schedule_first_screen);
+        addScheduleSecondScreen = view.findViewById(R.id.add_schedule_second_screen);
 
         handleUpdate(sleepTimePicker.getBedTime(), sleepTimePicker.getWakeTime());
     }
@@ -199,7 +195,14 @@ public class AddScheduleFragment extends Fragment {
 
         identifier ++;
         sharedPreferences.edit().putInt("scheduleIdentifier", identifier).apply();
+
+        changeScreen();
         Log.d(TAG, newTimeTable.toString());
+    }
+
+    private void changeScreen(){
+        addScheduleFirstScreen.setVisibility(View.GONE);
+        addScheduleSecondScreen.setVisibility(View.VISIBLE);
     }
 
     private void manageDialogClicks(){

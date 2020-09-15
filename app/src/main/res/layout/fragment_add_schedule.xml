@@ -7,7 +7,9 @@
     tools:context=".Fragments.Schedule.AddScheduleFragment">
 
     <RelativeLayout
+        android:id="@+id/add_schedule_first_screen"
         android:layout_width="match_parent"
+        android:visibility="visible"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -339,6 +341,39 @@
         </Button>
     </RelativeLayout>
 
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/add_schedule_second_screen"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+
+        <EditText
+            android:id="@+id/searcher"
+            android:layout_margin="20dp"
+            android:paddingRight="15sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15sp"
+            android:hint="Search an app"
+
+            android:inputType="text"
+            android:textSize="20sp"
+            android:background="@drawable/border_searcher"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+        </EditText>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/apps_list"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/searcher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 
