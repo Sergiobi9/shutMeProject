@@ -2,40 +2,19 @@ package com.example.shutmeproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.LinkProperties;
-import android.net.Network;
-import android.net.NetworkCapabilities;
-import android.net.NetworkRequest;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
-import com.example.shutmeproject.Adapters.AppAdapter;
-import com.example.shutmeproject.Bytes.BytesConverterManager;
 import com.example.shutmeproject.Fragments.AppListFragment;
 import com.example.shutmeproject.Fragments.Schedule.AddScheduleFragment;
-import com.example.shutmeproject.Fragments.ScheduleFragment;
-import com.example.shutmeproject.Fragments.SettingsFragment;
+import com.example.shutmeproject.Fragments.Settings.SettingsFragment;
 import com.example.shutmeproject.Fragments.ShopFragment;
 import com.example.shutmeproject.Fragments.VPNFragment;
-import com.example.shutmeproject.Helpers.ByteUnitsEnum;
-import com.example.shutmeproject.Helpers.InstaledApps;
-import com.example.shutmeproject.Helpers.MyConnectivityManager;
-import com.example.shutmeproject.Helpers.Permissions;
-import com.example.shutmeproject.Model.AppInfo;
-import com.example.shutmeproject.Traffic.TrafficManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 

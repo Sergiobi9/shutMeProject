@@ -3,12 +3,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.SettingsFragment">
+    tools:context=".Fragments.Settings.SettingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="75dp"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/hi_mom_btn"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Hi mom"
+                    android:layout_centerHorizontal="true"
+                    android:paddingRight="35dp"
+                    android:gravity="center"
+                    android:paddingLeft="35dp"
+                    android:background="@drawable/button_ripple"
+                    android:layout_height="wrap_content">
+                </Button>
+
+                <Button
+                    android:id="@+id/terms_and_conditions_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/hi_mom_btn"
+                    android:textColor="@color/white"
+                    android:text="Terms and conditions"
+                    android:layout_marginTop="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:paddingRight="35dp"
+                    android:paddingLeft="35dp"
+                    android:background="@drawable/button_ripple"
+                    android:layout_height="wrap_content">
+                </Button>
+
+                <Button
+                    android:id="@+id/privacy_policy_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:textColor="@color/white"
+                    android:text="Privacy policy"
+                    android:paddingRight="35dp"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="35dp"
+                    android:gravity="center"
+                    android:background="@drawable/button_ripple"
+                    android:layout_below="@+id/terms_and_conditions_btn"
+                    android:layout_height="wrap_content">
+                </Button>
+
+            </RelativeLayout>
+
+
+        </ScrollView>
+
+    </FrameLayout>
+
+
 
 </FrameLayout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Settings.HiMomFragment">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="35dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="35dp"
+        android:src="@drawable/back_icon"
+        android:layout_height="35dp">
+    </ImageView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginTop="75dp"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/app_logo_iv"
+                android:layout_width="75dp"
+                android:layout_marginTop="75dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/logo_icon"
+                android:layout_height="75dp">
+            </ImageView>
+
+            <TextView
+                android:id="@+id/hi_mom_title"
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/app_logo_iv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/nunito"
+                android:textSize="20sp"
+                android:textColor="@color/gray"
+                android:text="Hi mom"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hi_mom_title"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:gravity="center"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/nunito"
+                android:textSize="20sp"
+                android:textColor="@color/gray">
+            </TextView>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</FrameLayout>
